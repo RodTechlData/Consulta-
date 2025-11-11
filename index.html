@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuestionario Neo-Futurista</title>
+    <!-- Carga de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configuración de Fuentes y Estilos Neo-Futuristas -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d1117; /* Fondo oscuro casi negro */
+        }
+
+        /* --- Animación Keyframes Neo-Futurista --- */
+        @keyframes pulse-shadow {
+            0% { box-shadow: 0 0 10px rgba(59, 130, 246, 0.4); } /* Sombra Azul Suave */
+            50% { box-shadow: 0 0 20px rgba(168, 85, 247, 0.8), 0 0 5px rgba(59, 130, 246, 0.6); } /* Sombra Púrpura más intensa */
+            100% { box-shadow: 0 0 10px rgba(59, 130, 246, 0.4); }
+        }
+
+        /* Aplica la animación al contenedor principal */
+        .neo-container {
+            animation: pulse-shadow 4s infinite ease-in-out;
+        }
+
+        /* Estilo para los botones de radio NO seleccionados (base oscura) */
+        .radio-label-base {
+            background-color: #1f2937; /* Gris oscuro */
+            border: 1px solid #475569; /* Borde gris azulado */
+            color: #d1d5db; /* Texto gris claro */
+        }
+
+        /* Estilo para los radio buttons seleccionados (gradiente y brillo) */
+        input[type="radio"]:checked + label {
+            /* Degradado de selección vibrante */
+            background-image: linear-gradient(to right, var(--tw-gradient-stops));
+            --tw-gradient-from: #a855f7; /* Púrpura */
+            --tw-gradient-to: #3b82f6; /* Azul */
+            color: white;
+            border-color: #a855f7;
+            /* Efecto de brillo intenso */
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.7);
+        }
+
+        /* Estilo para el botón de submit (gradiente y brillo) */
+        .submit-button-glow {
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.6);
+        }
+    </style>
+</head>
+<body class="p-4 flex items-center justify-center min-h-screen">
+
+    <!-- Contenedor Principal con Sombra Pulsante Animada -->
+    <div class="w-full max-w-xl bg-gray-800 neo-container shadow-2xl rounded-xl p-6 md:p-10 border border-gray-700">
+
+        <!-- Header -->
+        <header class="mb-8 text-center">
+            <h1 class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 animate-pulse">🚀 Cuestionario Techflow</h1>
+            <p class="mt-3 text-gray-300">Explora tus intereses en IA, Web, y Apps.</p>
+        </header>
+
+        <!-- Formulario (Configurado para Netlify Forms) -->
+        <form id="techInterestForm" name="tech_interest" method="POST" data-netlify="true" class="space-y-8">
+            
+            <input type="hidden" name="form-name" value="tech_interest" />
+
+            <!-- Sección de Datos Personales -->
+            <div class="p-4 bg-gray-700/50 rounded-xl border border-gray-700">
+                <h2 class="text-2xl font-bold text-blue-400 border-b border-blue-400/50 pb-2 mb-4">Tus Datos de Acceso</h2>
+                
+                <div>
+                    <label for="name" class="block text-sm font-medium text-gray-300 mb-1">Tu Nombre Completo</label>
+                    <input type="text" id="name" name="name" required class="mt-1 block w-full rounded-lg bg-gray-900 border-blue-600/50 border shadow-inner p-3 text-white focus:ring-blue-500 focus:border-blue-500 transition duration-150">
+                </div>
+    
+                <div class="flex space-x-4 mt-4">
+                    <div class="flex-1">
+                        <label for="age" class="block text-sm font-medium text-gray-300 mb-1">Tu Edad (14-18)</label>
+                        <input type="number" id="age" name="age" required min="14" max="18" class="mt-1 block w-full rounded-lg bg-gray-900 border-blue-600/50 border shadow-inner p-3 text-white focus:ring-blue-500 focus:border-blue-500 transition duration-150">
+                    </div>
+                    <div class="flex-1">
+                        <label for="email" class="block text-sm font-medium text-gray-300 mb-1">Tu Correo Electrónico</label>
+                        <input type="email" id="email" name="email" required class="mt-1 block w-full rounded-lg bg-gray-900 border-blue-600/50 border shadow-inner p-3 text-white focus:ring-blue-500 focus:border-blue-500 transition duration-150">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección de Consultas Guía (6 Consultas) -->
+            <h2 class="text-2xl font-bold text-blue-400 border-b border-blue-400/50 pb-2 mb-4 pt-4">Define tu Trayectoria</h2>
+
+            <!-- Consulta 1: Interés en AI -->
+            <div class="space-y-3 p-4 bg-gray-700/30 rounded-xl border border-gray-700 transition duration-300 hover:border-purple-500">
+                <p class="text-base font-semibold text-gray-200">1. <span class="text-purple-300">Inteligencia Artificial:</span> ¿Te gustaría programar sistemas que piensen, tomen decisiones o reconozcan patrones?</p>
+                <div class="flex flex-wrap gap-4">
+                    <input type="radio" id="q1_si" name="q1_ai_interest" value="Sí" required class="hidden">
+                    <label for="q1_si" class="radio-label-base cursor-pointer px-4 py-2 rounded-full transition duration-300 transform hover:scale-105 hover:shadow-lg text-sm font-medium">Sí, IA/ML es mi foco</label>
+                    <input type="radio" id="q1_no" name="q1_ai_interest" value="No" class="hidden">
+                    <label for="q1_no" class="radio-label-base cursor-pointer px-4 py-2 rounded-full transition duration-300 transform hover:scale-105 hover:shadow-lg text-sm font-medium">No, prefiero otros campos</label>
+                </div>
+            </div>
+
+            <!-- Consulta 2: Interés en Desarrollo Web (Front-end) -->
+            <div class="space-y-3 p-4 bg-gray-700/30 rounded-xl border border-gray-700 transition duration-300 hover:border-purple-500">
+                <p class="text-base font-semibold text-gray-200">2. <span class="text-cyan-300">Desarrollo Web:</span> ¿Te interesa construir interfaces web dinámicas y visualmente impactantes?</p>
+                <div class="flex flex-wrap gap-4">
+                    <input type="radio" id="q2_si" name="q2_web_interest" value="Sí" required class="hidden">
+                    <label for="q2_si" class="radio-label-base cursor-pointer px-4 py-2 rounded-full transition duration-300 transform hover:scale-105 hover:shadow-lg text-sm font-medium">Sí, diseño y Front-end</label>
+                    <input type="radio" id="q2_no" name="q2_web_interest" value="No" class="hidden">
+                    <label for="q2_no" class="radio-label-base cursor-pointer px-4 py-2 rounded-full transition duration-300 transform hover:scale-105 hover:shadow-lg text-sm font-medium">No, prefiero Apps o Back-end</label>
+                </div>
+            </div>
+
+            <!-- Consulta 3: Interés en Apps Móviles -->
+            <div class="space-y-3 p-4 bg-gray-700/30 rounded-xl border border-gray-700 transition duration-300 hover:border-purple-500">
+                <p class="text-base font-semibold text-gray-200">3. <span class="text-green-300">Apps Nativas:</span> ¿Te gustaría crear aplicaciones que usen funcionalidades específicas de teléfonos (cámara, GPS, notificaciones)?</p>
+                <div class="flex flex-wrap gap-4">
+                    <input type="radio" id="q3_si" name="q3_app_interest" value="Sí" required class="hidden">
+                    <label for="q3_si" class="radio-label-base cursor-pointer px-4 py-2 rounded-full transition duration-300 transform hover:scale-105 hover:shadow-lg text-sm font-medium">Sí, Android / iOS nativas</label>
+                    <input type="radio" id="q3_no" name="q3_app_interest" value="No" class="hidden">
+                    <label for="q3_no" class="radio-label-base cursor-pointer px-4 py-2 rounded-full transition duration-300 transform hover:scale-105 hover:shadow-lg text-sm font-medium">No, me enfoco en Web</label>
+                </div>
+            </div>
+
+            <!-- Consulta 4: Preferencia de Rol (Diseño vs. Lógica) -->
+            <div class="space-y-3 p-4 bg-gray-700/30 rounded-xl border border-gray-700 transition duration-300 hover:border-purple-500">
+                <p class="text-base font-semibold text-gray-200">4. <span class="text-yellow-300">Rol:</span> ¿Prefieres trabajar en lo que se ve (Diseño/UI) o en la lógica de datos y el servidor (Back-end)?</p>
+                <div class="flex flex-wrap gap-4">
+                    <input type="radio" id="q4_diseno" name="q4_role_preference" value="Diseño (Front-end/UI)" required class="hidden">
+                    <label for="q4_diseno" class="radio-label-base cursor-pointer px-4 py-2 rounded-full transition duration-300 transform hover:scale-105 hover:shadow-lg text-sm font-medium">Diseño / Interfaz de Usuario</label>
+                    <input type="radio" id="q4_logica" name="q4_role_preference" value="Lógica (Back-end/IA)" class="hidden">
+                    <label for="q4_logica" class="radio-label-base cursor-pointer px-4 py-2 rounded-full transition duration-300 transform hover:scale-105 hover:shadow-lg text-sm font-medium">Lógica / Back-end</label>
+                </div>
+            </div>
+
+            <!-- Consulta 5: Lenguaje de Programación Específico -->
+            <div class="space-y-3 p-4 bg-gray-700/30 rounded-xl border border-gray-700 transition duration-300 hover:border-purple-500">
+                <p class="text-base font-semibold text-gray-200">5. <span class="text-red-400">Lenguaje:</span> ¿Qué lenguaje te llama más la atención para empezar a programar?</p>
+                <div class="flex flex-wrap gap-4">
+                    <input type="radio" id="q5_python" name="q5_language" value="Python (IA, Data)" required class="hidden">
+                    <label for="q5_python" class="radio-label-base cursor-pointer px-4 py-2 rounded-full transition duration-300 transform hover:scale-105 hover:shadow-lg text-sm font-medium">Python</label>
+                    <input type="radio" id="q5_javascript" name="q5_language" value="JavaScript (Web, Apps)" class="hidden">
+                    <label for="q5_javascript" class="radio-label-base cursor-pointer px-4 py-2 rounded-full transition duration-300 transform hover:scale-105 hover:shadow-lg text-sm font-medium">JavaScript</label>
+                    <input type="radio" id="q5_java" name="q5_language" value="Java/Kotlin (Apps Nativas)" class="hidden">
+                    <label for="q5_java" class="radio-label-base cursor-pointer px-4 py-2 rounded-full transition duration-300 transform hover:scale-105 hover:shadow-lg text-sm font-medium">Java / Kotlin</label>
+                    <input type="radio" id="q5_ninguno" name="q5_language" value="No sé / Cualquiera me sirve" class="hidden">
+                    <label for="q5_ninguno" class="radio-label-base cursor-pointer px-4 py-2 rounded-full transition duration-300 transform hover:scale-105 hover:shadow-lg text-sm font-medium">No estoy seguro</label>
+                </div>
+            </div>
+            
+            <!-- Consulta 6: Interés en Hardware / Robótica -->
+            <div class="space-y-3 p-4 bg-gray-700/30 rounded-xl border border-gray-700 transition duration-300 hover:border-purple-500">
+                <p class="text-base font-semibold text-gray-200">6. <span class="text-orange-400">Robótica/Hardware:</span> ¿Te atrae la idea de programar dispositivos físicos, microcontroladores o robots?</p>
+                <div class="flex flex-wrap gap-4">
+                    <input type="radio" id="q6_si" name="q6_hardware_interest" value="Sí" required class="hidden">
+                    <label for="q6_si" class="radio-label-base cursor-pointer px-4 py-2 rounded-full transition duration-300 transform hover:scale-105 hover:shadow-lg text-sm font-medium">Sí, la robótica es esencial</label>
+                    <input type="radio" id="q6_no" name="q6_hardware_interest" value="No" class="hidden">
+                    <label for="q6_no" class="radio-label-base cursor-pointer px-4 py-2 rounded-full transition duration-300 transform hover:scale-105 hover:shadow-lg text-sm font-medium">No, prefiero software puro</label>
+                </div>
+            </div>
+
+            <!-- Área de texto para intereses adicionales -->
+            <div class="pt-4 p-4 bg-gray-700/50 rounded-xl border border-gray-700">
+                <label for="additional_interests" class="block text-sm font-medium text-gray-300 mb-2">7. Intereses Adicionales (Ciberseguridad, Blockchain, Videojuegos, etc.):</label>
+                <textarea id="additional_interests" name="additional_interests" rows="3" class="mt-1 block w-full rounded-lg bg-gray-900 border-blue-600/50 border shadow-inner p-3 text-white focus:ring-blue-500 focus:border-blue-500 transition duration-150" placeholder="Escribe aquí tus ideas o dudas."></textarea>
+            </div>
+
+            <!-- Botón de Envío -->
+            <div class="pt-6">
+                <button type="submit" class="w-full flex justify-center py-4 px-4 border border-transparent rounded-xl text-lg font-bold text-white bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300 transform hover:scale-[1.02] submit-button-glow">
+                    Enviar Respuestas al Cosmos Digital
+                </button>
+            </div>
+        </form>
+
+        <!-- Instrucción de Netlify -->
+        <div class="mt-8 p-4 bg-gray-700 rounded-xl text-center border border-purple-500/50">
+            <h3 class="mt-1 text-xl font-bold text-purple-400">Protocolo de Transmisión</h3>
+            <p class="mt-1 text-gray-300 text-sm">
+                La data será capturada por **Netlify Forms**. Por favor, configura la notificación en tu dashboard para que te llegue a 
+                <span class="font-bold text-cyan-400">rodrigo@dataflowia.com</span>.
+            </p>
+        </div>
+
+
+        <!-- Footer -->
+        <footer class="mt-8 pt-4 border-t border-gray-700 text-center text-sm text-gray-500">
+            <p class="mb-1">
+                <a href="https://www.dataflowia.com" target="_blank" class="text-blue-400 hover:text-blue-500 transition duration-150 font-medium">www.dataflowia.com</a>
+            </p>
+            <p>
+                Contacto: 
+                <a href="mailto:contacto@dataflowia.com" class="text-blue-400 hover:text-blue-500 transition duration-150 font-medium">contacto@dataflowia.com</a>
+            </p>
+        </footer>
+    </div>
+
+</body>
+</html>
